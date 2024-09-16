@@ -1,11 +1,15 @@
 <script setup>
 </script>
 <template>
-  <nav class="bg-dark">
-    <div class="text-light">
+  <nav class="bg-dark text-light">
+    <div>
+      <i class="bi bi-dice-6-fill"></i>
+      <i class="bi bi-dice-1-fill girar"></i>
       <span>Game Opinion</span>
     </div>
-    <router-link to="/">Home</router-link>
+    <router-link to="/">
+      <i class="bi bi-house-door-fill"></i>Home
+    </router-link>
   </nav>
   <router-view />
 </template>
@@ -18,13 +22,14 @@ nav {
   padding: 30px;
 
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+nav a{
+  color: white;
 }
-
 nav a.router-link-exact-active {
-  color: #42b983;
+  color:rgb(187, 187, 187);
+}
+.girar{
+  display: inline-block;
+  transform: rotate(-20deg) translateX(-20%);
 }
 </style>
