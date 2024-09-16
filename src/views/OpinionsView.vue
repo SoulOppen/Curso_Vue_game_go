@@ -10,6 +10,9 @@ const props= defineProps({
 })
 const game=ref({});
 const opinionsList=ref([]);
+const addList=(e)=>{
+    opinionsList.value=[...opinionsList.value,e]
+}
 const gameFetch= async ()=>{
     try{
     const key=process.env.VUE_APP_RAWG_API_KEY;
@@ -29,6 +32,6 @@ onMounted(()=>
 )
 </script>
 <template>
-    <FormComponent :name="game.name"/>
+    <FormComponent :name="game.name" @create-opinion="addList"/>
     <OpinionsComponent :list="opinionsList"/>
 </template>
