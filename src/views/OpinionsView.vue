@@ -1,12 +1,34 @@
 <script setup>
-import {defineProps} from 'vue';
+import {ref,defineProps,onMounted} from 'vue';
+import FormComponent from '@/components/FormComponent.vue'
+import OpinionsComponent from '@/components/OpinionsComponent.vue'
 const props= defineProps({
     id:{
         type:Number,
         required:true
     }
 })
+const game=ref({});
+const opinionsList=ref([]);
+const gameFetch= async ()=>{
+    try{
+    const key=process.env.VUE_APP_RAWG_API_KEY;
+    const response = await fetch(`https://api.rawg.io/api/games/${props.id}?key=${key}`);
+    if(!response.ok){
+        throw new Error('Juego no encontrado')
+    }
+    const data = await response.json();
+    game.value=data;
+    }
+    catch(e){
+        console.log(e)
+    }
+}
+onMounted(()=>
+    gameFetch()
+)
 </script>
 <template>
-    <p>{{props.id}}</p>
+    <FormComponent :name="game.name"/>
+    <OpinionsComponent :list="opinionsList"/>
 </template>

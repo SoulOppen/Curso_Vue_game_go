@@ -1,7 +1,7 @@
 <script setup>
 import {ref,onMounted} from 'vue';
 import CardComponent from '@/components/CardComponent.vue';
-const key='c47bd30d1c374425beac32be53f48520';
+const key=process.env.VUE_APP_RAWG_API_KEY;
 const size=12;
 const listGame=ref([]);
 const fetchGames = async () => {
@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <div class="container my-3 mx-auto">
   <div class="grid">
-    <CardComponent v-for="item in listGame" :key="item.id" :obj="item"/>
+    <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>
   </div>
 </div>
 </template>
@@ -33,6 +33,10 @@ onMounted(() => {
 .grid{
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  gap:5%;
+  gap:1vh;
+}
+.card__component{
+  display: block;
+  margin:0 auto;
 }
 </style>
