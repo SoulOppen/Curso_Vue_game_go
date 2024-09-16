@@ -1,22 +1,22 @@
+<script setup>
+</script>
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="bg-dark">
+    <div class="text-light">
+      <span>Game Opinion</span>
+    </div>
+    <router-link to="/">Home</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
 nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 30px;
+
 }
 
 nav a {
