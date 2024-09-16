@@ -27,7 +27,7 @@ const likeClass=computed(()=>like.value? "bi-heart-fill":"bi-heart");
       Update:{{ props.obj.updated }}
     </div>
     <div class="d-flex w-25 py-2 mx-2">
-      <RouterLink to="#" class="btn btn-primary">Opinar</RouterLink>
+      <RouterLink :to="`/opinions/${props.obj.id}`" class="btn btn-primary">Opinar</RouterLink>
       <i class="bi fs-3 text-danger mx-2" :class="likeClass" @click="likeToggle"></i>
     </div>
   </div>

@@ -1,6 +1,7 @@
 <script setup>
-import NotFoundComponent from '@/components/NotFoundComponent.vue';
 </script>
 <template>
-    <NotFoundComponent/>
+    <p>Not found</p>
 </template>
+<style scoped>
+</style>
