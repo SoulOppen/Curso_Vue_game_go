@@ -14,7 +14,7 @@ const likeClass=computed(()=>like.value? "bi-heart-fill":"bi-heart");
 </script>
 <template>
   <div class="card" style="width: 18rem;">
-  <img :src="props.obj.background_image" class="card-img-top" :alt="'img-'+props.obj.name">
+  <img :src="props.obj.background_image" class="card-img-top height" :alt="'img-'+props.obj.name">
   <div class="card-body w-100 p-0">
     <h5 class="card-title mx-2">{{props.obj.name}}</h5>
     <div class="border-top px-3 my-2">
@@ -33,3 +33,8 @@ const likeClass=computed(()=>like.value? "bi-heart-fill":"bi-heart");
   </div>
 </div>
 </template>
+<style scoped>
+.height{
+  height:50%;
+}
+</style>

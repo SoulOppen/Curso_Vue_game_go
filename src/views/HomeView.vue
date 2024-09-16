@@ -1,11 +1,12 @@
 <script setup>
 import {ref,onMounted} from 'vue';
 import CardComponent from '@/components/CardComponent.vue';
-
+const key='c47bd30d1c374425beac32be53f48520';
+const size=12;
 const listGame=ref([]);
 const fetchGames = async () => {
   try {
-    const response = await fetch('https://api.rawg.io/api/games?key=c47bd30d1c374425beac32be53f48520&&page_size=10');
+    const response = await fetch(`https://api.rawg.io/api/games?key=${key}&&page_size=${size}`);
     if (!response.ok){
       throw new Error("Ok status ",response.status);
     }
