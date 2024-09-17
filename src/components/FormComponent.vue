@@ -1,11 +1,6 @@
 <script setup>
-import {ref,defineProps,defineEmits} from 'vue';
-const props=defineProps({
-    name:{
-        type:String,
-        required:true
-    }
-})
+import {ref,defineEmits} from 'vue';
+
 const name=ref('');
 const text=ref('');
 const emit=defineEmits(['createOpinion']);
@@ -14,7 +9,7 @@ const add=()=>{
 }
 </script>
 <template>
-    <h1>Escribe tu opinión de: {{ props.name }}</h1>
+
     <form class="w-75 mx-auto">
         <div class="my-3">
             <label for="name" class="form-label">Nombre:</label>
@@ -28,9 +23,6 @@ const add=()=>{
     </form>
 </template>
 <style scoped>
-    h1{
-        text-align: center;
-    }
     textarea{
         resize: none;
         height: 5rem;
