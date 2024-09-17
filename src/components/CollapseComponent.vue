@@ -1,16 +1,29 @@
+<script setup>
+import {defineProps} from 'vue';
+const props=defineProps({
+  name:{
+    type:String,
+    required:true
+  },
+  text:{
+    type:String,
+    required:true
+  }
+})
+</script>
 <template>
-  <div>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseName" aria-expanded="false" aria-controls="collapseName">
-    Button with data-bs-target
+  <div class="d-block w-75 mx-auto my-3">
+  <button  type="button" data-bs-toggle="collapse" :data-bs-target="`#${props.name}`" aria-expanded="false" :aria-controls="`collapse${props.name}`" class="w-100 border-0 bg-primary-subtle text-start">
+    {{ props.name }}
   </button>
 
-<div class="collapse border" id="collapseName">
-  <div class="card card-body">
-    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+<div class="collapse border" :id="props.name">
+  <div class="border-bottom">
+    {{ props.text }}
   </div>
   <div>
-    <button class="btn btn-warning">Editar</button>
-    <button class="btn btn-danger">Eliminar</button>
+    <button class="btn btn-warning mx-2">Editar</button>
+    <button class="btn btn-danger mx-2">Eliminar</button>
   </div>
 </div>
 </div>

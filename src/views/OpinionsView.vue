@@ -1,5 +1,5 @@
 <script setup>
-import {ref,computed,defineProps,onMounted} from 'vue';
+import {ref,computed,defineProps,onMounted, reactive} from 'vue';
 import FormComponent from '@/components/FormComponent.vue'
 import CollapseComponent from '@/components/CollapseComponent.vue'
 const props= defineProps({
@@ -9,13 +9,12 @@ const props= defineProps({
     }
 })
 const game=ref({});
-const opinionsList=ref([]);
+const opinionsList=reactive([]);
 const addList=(e)=>{
-    opinionsList.value.push(e);
-    console.log(opinionsList)
+    opinionsList.push(e);
 }
 const haveOpinion=computed(()=>{
-    return opinionsList.value.length > 0;
+    return opinionsList.length > 0;
 })
 const gameFetch= async ()=>{
     try{
@@ -43,6 +42,6 @@ onMounted(()=>
         No existen opiniones para mostrar.
     </div>
     <div v-else>
-        <CollapseComponent v-for="item in opinionsList" :key="item"/>
+        <CollapseComponent v-for="item in opinionsList" :key="item" :name="item.name" :text="item.text"/>
     </div>
 </template>

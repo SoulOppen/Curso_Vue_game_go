@@ -6,6 +6,8 @@ const text=ref('');
 const emit=defineEmits(['createOpinion']);
 const add=()=>{
     emit('createOpinion',{name:name.value,text:text.value})
+    name.value='';
+    text.value='';
 }
 </script>
 <template>
