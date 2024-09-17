@@ -1,5 +1,5 @@
 <script setup>
-import {defineProps} from 'vue';
+import {defineProps,defineEmits} from 'vue';
 const props=defineProps({
   name:{
     type:String,
@@ -10,6 +10,10 @@ const props=defineProps({
     required:true
   }
 })
+const emits=defineEmits(['delete'])
+const borrar=()=>{
+  emits('delete',{name:props.name,text:props.text})
+}
 </script>
 <template>
   <div class="d-block w-75 mx-auto my-3">
@@ -23,7 +27,7 @@ const props=defineProps({
   </div>
   <div>
     <button class="btn btn-warning mx-2">Editar</button>
-    <button class="btn btn-danger mx-2">Eliminar</button>
+    <button class="btn btn-danger mx-2" @click="borrar">Eliminar</button>
   </div>
 </div>
 </div>

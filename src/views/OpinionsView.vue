@@ -13,6 +13,10 @@ const opinionsList=reactive([]);
 const addList=(e)=>{
     opinionsList.push(e);
 }
+const deleteGame=(e)=>{
+    const index=opinionsList.findIndex((item)=>item.name===e.name&&item.text===e.text);
+    opinionsList.splice(index,1);
+}
 const haveOpinion=computed(()=>{
     return opinionsList.length > 0;
 })
@@ -42,6 +46,6 @@ onMounted(()=>
         No existen opiniones para mostrar.
     </div>
     <div v-else>
-        <CollapseComponent v-for="item in opinionsList" :key="item" :name="item.name" :text="item.text"/>
+        <CollapseComponent v-for="item in opinionsList" :key="item" :name="item.name" :text="item.text" @delete="deleteGame"/>
     </div>
 </template>
