@@ -11,7 +11,6 @@ const fetchGames = async () => {
       throw new Error("Ok status ",response.status);
     }
     const data=await response.json();
-    console.log(data.results[0])
     listGame.value =data.results;
   } catch (error) {
     console.error(error);
@@ -23,6 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <h1 class="text-center">Juegos</h1>
   <div class="container my-3 mx-auto">
   <div class="grid">
     <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>

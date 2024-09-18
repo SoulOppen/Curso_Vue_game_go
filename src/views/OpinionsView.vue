@@ -13,9 +13,9 @@ const name=ref('');
 const text=ref('');
 const opinionsList=reactive([]);
 const indexOpinion=ref(null);
+const isLoading = ref(true);
 const addList=(e)=>{
     if (indexOpinion.value!==null) {
-        console.log(e)
         opinionsList.splice(indexOpinion.value,0,e)
         indexOpinion.value=null;
     }else{
@@ -51,14 +51,21 @@ const gameFetch= async ()=>{
     }
     catch(e){
         console.log(e)
+    }finally {
+        isLoading.value = false; // Cambia el estado de carga
     }
 }
 onMounted(async()=>
-    await gameFetch(),
-    console.log(game)
+    await gameFetch()
     )
 </script>
 <template>
+    <div v-if="isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border  text-primary spinner-size my-5" role="status">
+         <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div v-else>
     <h2 class="text-center">Escribe tu opinión de: {{ game.name }}</h2>
     <FormComponent :name="name" :text="text" :textButton="textButton" @createOpinion="addList"/>
     <h2 class="text-center">A continuación podrás ver tu opinión</h2>
@@ -74,4 +81,11 @@ onMounted(async()=>
         @delete="deleteGame"
         @edit="editGame"/>
     </div>
+</div>
 </template>
+<style scoped>
+.spinner-size{
+    height: 5rem;
+    width: 5rem;
+}
+</style>

@@ -48,7 +48,7 @@ const add=()=>{
             <label for="opinion" class="form-label">Opinión:</label>
             <textarea class="form-control" id="opinion" placeholder="Opina" v-model="textInput"></textarea>
         </div>
-        <button type="submit" @click.prevent="add">{{props.textButton}}</button>
+        <button type="submit" @click.prevent="add" class="rounded-3 border-0">{{props.textButton}}</button>
     </form>
 </template>
 <style scoped>
