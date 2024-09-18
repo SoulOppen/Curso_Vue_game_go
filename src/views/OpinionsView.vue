@@ -4,19 +4,38 @@ import FormComponent from '@/components/FormComponent.vue'
 import CollapseComponent from '@/components/CollapseComponent.vue'
 const props= defineProps({
     id:{
-        type:Number,
+        type:String,
         required:true
     }
 })
-const game=ref({});
+const game=reactive({});
+const name=ref('');
+const text=ref('');
 const opinionsList=reactive([]);
+const indexOpinion=ref(null);
 const addList=(e)=>{
-    opinionsList.push(e);
+    if (indexOpinion.value!==null) {
+        console.log(e)
+        opinionsList.splice(indexOpinion.value,0,e)
+        indexOpinion.value=null;
+    }else{
+        opinionsList.push(e);
+    }
 }
 const deleteGame=(e)=>{
     const index=opinionsList.findIndex((item)=>item.name===e.name&&item.text===e.text);
     opinionsList.splice(index,1);
 }
+const editGame=(e)=>{
+    const index=opinionsList.findIndex((item)=>item.name===e.name&&item.text===e.text);
+    opinionsList.splice(index,1);
+    indexOpinion.value=index;
+    name.value=e.name;
+    text.value=e.text;
+}
+const textButton=computed(()=>{
+    return indexOpinion.value!==null? 'Actualizar':'Agregar';
+})
 const haveOpinion=computed(()=>{
     return opinionsList.length > 0;
 })
@@ -28,24 +47,31 @@ const gameFetch= async ()=>{
         throw new Error('Juego no encontrado')
     }
     const data = await response.json();
-    game.value=data;
+    Object.assign(game, data);
     }
     catch(e){
         console.log(e)
     }
 }
-onMounted(()=>
-    gameFetch()
-)
+onMounted(async()=>
+    await gameFetch(),
+    console.log(game)
+    )
 </script>
 <template>
     <h2 class="text-center">Escribe tu opinión de: {{ game.name }}</h2>
-    <FormComponent :name="game.name" @create-opinion="addList"/>
+    <FormComponent :name="name" :text="text" :textButton="textButton" @createOpinion="addList"/>
     <h2 class="text-center">A continuación podrás ver tu opinión</h2>
     <div v-if="!haveOpinion" class="bg-success-subtle w-75 mx-auto p-3">
         No existen opiniones para mostrar.
     </div>
     <div v-else>
-        <CollapseComponent v-for="item in opinionsList" :key="item" :name="item.name" :text="item.text" @delete="deleteGame"/>
+        <CollapseComponent
+        v-for="item in opinionsList"
+        :key="`${item.name}-${item.text}`"
+        :name="item.name"
+        :text="item.text"
+        @delete="deleteGame"
+        @edit="editGame"/>
     </div>
 </template>
