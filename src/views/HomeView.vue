@@ -1,11 +1,13 @@
 <script setup>
 import {ref,onMounted} from 'vue';
 import CardComponent from '@/components/CardComponent.vue';
-const key=process.env.VUE_APP_RAWG_API_KEY;
-const size=12;
+
 const listGame=ref([]);
+const isLoading = ref(true);
 const fetchGames = async () => {
   try {
+    const key=process.env.VUE_APP_RAWG_API_KEY;
+const size=12;
     const response = await fetch(`https://api.rawg.io/api/games?key=${key}&&page_size=${size}`);
     if (!response.ok){
       throw new Error("Ok status ",response.status);
@@ -14,7 +16,9 @@ const fetchGames = async () => {
     listGame.value =data.results;
   } catch (error) {
     console.error(error);
-  }
+  }finally {
+        isLoading.value = false; // Cambia el estado de carga
+    }
 };
 onMounted(() => {
   fetchGames();
@@ -23,8 +27,14 @@ onMounted(() => {
 
 <template>
   <h1 class="text-center">Juegos</h1>
+
   <div class="container my-3 mx-auto">
-  <div class="grid">
+    <div v-if="isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border  text-primary spinner-size my-5" role="status">
+         <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+  <div v-else class="grid">
     <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>
   </div>
 </div>
@@ -38,5 +48,9 @@ onMounted(() => {
 .card__component{
   display: block;
   margin:0 auto;
+}
+.spinner-size{
+    height: 5rem;
+    width: 5rem;
 }
 </style>
