@@ -24,6 +24,7 @@ nav {
 }
 nav a{
   color: white;
+  text-decoration: none;
 }
 nav a.router-link-exact-active {
   color:rgb(187, 187, 187);
@@ -32,4 +33,5 @@ nav a.router-link-exact-active {
   display: inline-block;
   transform: rotate(-20deg) translateX(-20%);
 }
+
 </style>

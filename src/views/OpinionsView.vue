@@ -1,6 +1,7 @@
 <script setup>
 import {ref,computed,defineProps,onMounted, reactive} from 'vue';
-import FormComponent from '@/components/FormComponent.vue'
+import FormComponent from '@/components/FormComponent.vue';
+import SpinnerComponent from '@/components/SpinnerComponent.vue';
 import CollapseComponent from '@/components/CollapseComponent.vue'
 const props= defineProps({
     id:{
@@ -61,9 +62,7 @@ onMounted(async()=>
 </script>
 <template>
     <div v-if="isLoading" class="d-flex justify-content-center">
-        <div class="spinner-border  text-primary spinner-size my-5" role="status">
-         <span class="visually-hidden">Loading...</span>
-        </div>
+        <SpinnerComponent/>
     </div>
     <div v-else>
     <h2 class="text-center">Escribe tu opinión de: {{ game.name }}</h2>

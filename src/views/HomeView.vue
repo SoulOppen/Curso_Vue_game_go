@@ -1,7 +1,7 @@
 <script setup>
 import {ref,onMounted} from 'vue';
 import CardComponent from '@/components/CardComponent.vue';
-
+import SpinnerComponent from '@/components/SpinnerComponent.vue';
 const listGame=ref([]);
 const isLoading = ref(true);
 const fetchGames = async () => {
@@ -24,15 +24,11 @@ onMounted(() => {
   fetchGames();
 });
 </script>
-
 <template>
   <h1 class="text-center">Juegos</h1>
-
   <div class="container my-3 mx-auto">
     <div v-if="isLoading" class="d-flex justify-content-center">
-        <div class="spinner-border  text-primary spinner-size my-5" role="status">
-         <span class="visually-hidden">Loading...</span>
-        </div>
+      <SpinnerComponent/>
     </div>
   <div v-else class="grid">
     <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>
@@ -48,9 +44,5 @@ onMounted(() => {
 .card__component{
   display: block;
   margin:0 auto;
-}
-.spinner-size{
-    height: 5rem;
-    width: 5rem;
 }
 </style>
