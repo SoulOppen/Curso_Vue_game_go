@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import OpinionsView from "../views/OpinionsView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 const routes = [
   {
     path: "/",
     name: "home",
-    component: () =>
-      import(/* webpackChunkName: "home" */ "../views/HomeView.vue"),
+    component: HomeView,
   },
   {
     path: "/opinions/:id(\\d+)",
     name: "opinions",
     props: true,
-    component: () =>
-      import(/* webpackChunkName: "opinions" */ "../views/OpinionsView.vue"),
+    component: OpinionsView,
   },
   {
     path: "/:catchAll(.*)",
     name: "notFound",
-    component: () =>
-      import(/* webpackChunkName: "notFound" */ "../views/NotFoundView.vue"),
+    component: NotFoundView,
   },
 ];
 

@@ -56,8 +56,8 @@ const gameFetch= async ()=>{
         isLoading.value = false; // Cambia el estado de carga
     }
 }
-onMounted(async()=>
-    await gameFetch()
+onMounted(()=>
+    gameFetch()
     )
 </script>
 <template>

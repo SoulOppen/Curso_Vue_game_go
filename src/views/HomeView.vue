@@ -25,13 +25,15 @@ onMounted(() => {
 });
 </script>
 <template>
-  <h1 class="text-center">Juegos</h1>
+  <div>
+ <h1 class="text-center">Juegos</h1>
   <div class="container my-3 mx-auto">
     <div v-if="isLoading" class="d-flex justify-content-center">
       <SpinnerComponent/>
     </div>
-  <div v-else class="grid">
-    <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>
+    <div v-else class="grid">
+      <CardComponent v-for="item in listGame" :key="item.id" :obj="item" class="card__component"/>
+    </div>
   </div>
 </div>
 </template>

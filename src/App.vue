@@ -1,5 +1,3 @@
-<script setup>
-</script>
 <template>
   <nav class="bg-dark text-light">
     <div>
@@ -11,7 +9,12 @@
       <i class="bi bi-house-door-fill"></i>Home
     </router-link>
   </nav>
-  <router-view />
+  <router-view v-slot="{ Component }">
+  <transition name="slide" mode="out-in">
+    <component :is="Component" :key="$route.path"/>
+  </transition>
+</router-view>
+
 </template>
 
 <style>
@@ -33,5 +36,17 @@ nav a.router-link-exact-active {
   display: inline-block;
   transform: rotate(-20deg) translateX(-20%);
 }
+.slide-enter, .slide-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
 
+.slide-enter-active, .slide-leave-active {
+  transition: transform 1s ease, opacity 0.5s ease;
+}
+
+.slide-enter-to, .slide-leave {
+  transform: translateX(0);
+  opacity: 1;
+}
 </style>
