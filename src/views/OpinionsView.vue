@@ -16,13 +16,14 @@ const opinionsList=reactive([]);
 const indexOpinion=ref(null);
 const isLoading = ref(true);
 const addList=(e)=>{
+    if (e.name.trim()+e.text.trim()!=='' && opinionsList.findIndex((item)=>item.name===e.name&&item.text===e.text)==-1){
     if (indexOpinion.value!==null) {
         opinionsList.splice(indexOpinion.value,0,e)
         indexOpinion.value=null;
     }else{
         opinionsList.push(e);
     }
-}
+}}
 const deleteGame=(e)=>{
     const index=opinionsList.findIndex((item)=>item.name===e.name&&item.text===e.text);
     opinionsList.splice(index,1);
