@@ -11,9 +11,11 @@ const interval = setInterval(() => {
 }, 1000)
 </script>
 <template>
+  <div>
     <h1>Page not found</h1>
     <h2>{{ timer }}</h2>
     <router-link to="/" class="link">Ir a Home</router-link>
+  </div>
 </template>
 <style scoped>
 h1,h2{
